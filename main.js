@@ -1,6 +1,7 @@
 import * as SPL from '@solana/spl-token';
 import { Connection } from '@solana/web3.js';
-import config from './config.json' assert { type: 'json' };
+import { readFileSync } from 'fs';
+const config = JSON.parse(readFileSync('./config.json', 'utf8'));
 import autoTx from './src/autoTx.js';
 import { calculateVolumeAndCost, calculateVolumeAndCost2 } from './src/calc.js';
 import chalk from 'chalk';

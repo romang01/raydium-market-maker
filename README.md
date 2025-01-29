@@ -32,7 +32,6 @@ TOKYO: tokyo.mainnet.block-engine.jito.wtf
 git clone https://github.com/drewshts/raydium-market-maker.git
 cd raydium-market-maker
 npm install
-nano config.json
 ```
 
 **THEN**

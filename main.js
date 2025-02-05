@@ -1,12 +1,13 @@
 import * as SPL from '@solana/spl-token';
 import { Connection } from '@solana/web3.js';
-import { readFileSync } from 'fs';
-const config = JSON.parse(readFileSync('./config.json', 'utf8'));
 import autoTx from './src/autoTx.js';
+import { organicVol, sellOnly } from './src/organicVol.js';
 import { calculateVolumeAndCost, calculateVolumeAndCost2 } from './src/calc.js';
 import chalk from 'chalk';
 import Table from 'cli-table3';
 import readline from 'readline';
+import { readFileSync } from 'fs';
+const config = JSON.parse(readFileSync('./config.json', 'utf8'));
 
 function displayMainMenu() {
     const table = new Table({
@@ -16,8 +17,10 @@ function displayMainMenu() {
 
     table.push(
         ['1', 'Start Dex Trending', 'Perform up to 8 unique buy-and-sell actions per transaction,\nensuring minimal loss while significantly boosting token volume\nand makers to increase the chance to be on trending spot.'],
-        ['2', 'Volume Calculator', 'Calculate the total token volume based on user-specified\nparameters such as Min and Max buy in SOL,\nDesired Volume, and token exchange rate.'],
-        ['3', 'Exit', 'Exit the program / CTRL + C to exit at any point.']
+        ['2', 'Create Organic Vol', 'Executes up to four (4) purchases solely to boost volume and\nmakers per bundle, with the option to sell using sell mode.'],
+        ['3', 'Sell Tokens', 'Immediately sell all tokens bought using organic volume mode'],
+        ['4', 'Volume Calculator', 'Calculate the total token volume based on user-specified\nparameters such as Min and Max buy in SOL,\nDesired Volume, and token exchange rate.'],
+        ['5', 'Exit', 'Exit the program / CTRL + C to exit at any point.']
     );
     console.log(table.toString());
 }
@@ -82,13 +85,23 @@ async function main() {
         switch (choice) {
             case '1':
                 console.log(chalk.green('\n---> MODE SELECTED <---'));
-                console.log(chalk.hex('#FF9900')("🎉 RAYDIUM VOL/MAKER BOOSTER\n\n"));
+                console.log(chalk.hex('#FF9900')("🎉 VOL/MAKER BOOSTER\n\n"));
                 await autoTx();
                 break;
             case '2':
-                await handleVolCalcMenu();
+                console.log(chalk.green('\n---> MODE SELECTED <---'));
+                console.log(chalk.hex('#FF9900')("🎉 ORGANIC VOL/MAKER BOOSTER\n\n"));
+                await organicVol();
                 break;
             case '3':
+                console.log(chalk.green('\n---> MODE SELECTED <---'));
+                console.log(chalk.hex('#FF9900')("🎉 SELL TOKENS\n\n"));
+                await sellOnly();
+                break;
+            case '4':
+                await handleVolCalcMenu();
+                break;
+            case '5':
                 console.log(chalk.green('Exiting program.'));
                 return;
             default:

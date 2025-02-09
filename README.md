@@ -29,7 +29,7 @@ TOKYO: tokyo.mainnet.block-engine.jito.wtf
 **Install NodeJS (https://nodejs.org)**
 
 ```
-git clone https://github.com/drewshts/raydium-market-maker.git
+git clone https://github.com/PUMPFUNSCRIPT/raydium-market-maker.git
 cd raydium-market-maker
 npm install
 ```
@@ -42,4 +42,4 @@ npm start
 
 
 **SUPPORT TG:** [Andrew](https://t.me/andrewbizzle)
-**Discord:** [GAW](https://discord.gg/ygxgHpFUt2)
+**Discord:** [X SCRIPTS](https://discord.gg/ygxgHpFUt2)

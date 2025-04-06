@@ -1,4 +1,4 @@
-<h1>Autonomous Raydium Market Maker, Volume Booster</h1>
+<h1>Autonomous Raydium and PumpSwap Market Maker, Volume Booster</h1>
 
 <h3>CONFIG Guide (config.json):</h3>
 
@@ -9,6 +9,8 @@
 "BLOCK_ENGINE_URL": "JITO BlockEngine Url (List provided below)",
 
 "PAYER_PRIV_KEY": "Your payer wallet private key who will pay/fund each transaction",
+
+"SELLER_PRIV_KEY": "Your sellet wallet private key who will receive and sell tokens bought using organic vol option",
 
 --------------------------------------------------------------------------------------------------------------------------------
 

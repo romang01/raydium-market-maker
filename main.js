@@ -1,6 +1,7 @@
 import * as SPL from '@solana/spl-token';
 import { Connection } from '@solana/web3.js';
 import autoTx from './src/autoTx.js';
+import { pumpSwapBuy, pumpSwapSell } from './src/pumpSwap.js';
 import { organicVol, sellOnly } from './src/organicVol.js';
 import { calculateVolumeAndCost, calculateVolumeAndCost2 } from './src/calc.js';
 import chalk from 'chalk';
@@ -20,7 +21,8 @@ function displayMainMenu() {
         ['2', 'Create Organic Vol', 'Executes up to four (4) purchases solely to boost volume and\nmakers per bundle, with the option to sell using sell mode.'],
         ['3', 'Sell Tokens', 'Immediately sell all tokens bought using organic volume mode'],
         ['4', 'Volume Calculator', 'Calculate the total token volume based on user-specified\nparameters such as Min and Max buy in SOL,\nDesired Volume, and token exchange rate.'],
-        ['5', 'Exit', 'Exit the program / CTRL + C to exit at any point.']
+        ['5', 'PumpSwap Bot', 'Pumpswap rank bot and sell bot'],
+        ['6', 'Exit', 'Exit the program / CTRL + C to exit at any point.']
     );
     console.log(table.toString());
 }
@@ -34,6 +36,20 @@ function displayVolCalcMenu() {
     table.push(
         ['1', '📊 CALCULATE BASED ON\nDESIRED VOLUME', 'Estimate required transactions and SOL usage based on minimum buy,\nmaximum buy, and the desired token volume in USD.'],
         ['2', '📊 CALCULATE BASED ON\nTOTAL SOL TO SPEND', 'Determine the token volume that can be generated based on\nminimum/maximum buy, and the total SOL available for transactions.'],
+        ['3', 'Back to Main Menu', 'Return to the main menu.']
+    );
+    console.log(table.toString());
+}
+
+function displayPumpSwapMenu() {
+    const table = new Table({
+        head: ['Option', 'Action', 'Description'],
+        colWidths: [10, 30, 70],
+    });
+
+    table.push(
+        ['1', 'PumpSwap Rank Bot', 'Perform 4 buys with unique makers that helps to boost rank on Dex'],
+        ['2', 'PumpSwap Sell Token', 'Sell tokens bought using PumpSwap Rank Bot'],
         ['3', 'Back to Main Menu', 'Return to the main menu.']
     );
     console.log(table.toString());
@@ -77,6 +93,29 @@ async function handleVolCalcMenu() {
     }
 }
 
+async function handlePumpSwapMenu() {
+    while (true) {
+        displayPumpSwapMenu();
+        const choice = await getUserInput('\nEnter your choice: ');
+
+        switch (choice) {
+            case '1':
+                await pumpSwapBuy();
+                break;
+
+            case '2':
+                await pumpSwapSell();
+                break;
+
+            case '3':
+                return;
+
+            default:
+                console.log(chalk.red('Invalid selection. Please choose a valid option.'));
+        }
+    }
+}
+
 async function main() {
     while (true) {
         displayMainMenu();
@@ -102,6 +141,9 @@ async function main() {
                 await handleVolCalcMenu();
                 break;
             case '5':
+                await handlePumpSwapMenu();
+                break;
+            case '6':
                 console.log(chalk.green('Exiting program.'));
                 return;
             default:

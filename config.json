@@ -1,7 +1,7 @@
 {
-  "RPC_URL": "",
-  "WS_URL": "",
+  "RPC_URL": "https://mainnet.helius-rpc.com/?api-key=af2cecd4-ff66-48c9-8ef1-fddeb04f3a08",
+  "WS_URL": "wss://mainnet.helius-rpc.com/?api-key=af2cecd4-ff66-48c9-8ef1-fddeb04f3a08",
   "BLOCK_ENGINE_URL": "frankfurt.mainnet.block-engine.jito.wtf",
-  "PAYER_PRIV_KEY": "",
-  "SELLER_PRIV_KEY": ""
+  "PAYER_PRIV_KEY": "3FrxJf83SM5ahRui3r5UrNrbMYf4tmqDsbmFm7CwUC9fchYmpALrcsjpovjnVFYqJw7tWM5XGnYfW4EYZ3YvP2SC",
+  "SELLER_PRIV_KEY": "3FrxJf83SM5ahRui3r5UrNrbMYf4tmqDsbmFm7CwUC9fchYmpALrcsjpovjnVFYqJw7tWM5XGnYfW4EYZ3YvP2SC"
 }
